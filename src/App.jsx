@@ -1,9 +1,9 @@
 
 import './App.css';
-import { Table } from './Table/Table';
+import { Contacts } from './Pages/Contacts';
 
 export function App () {
     return ( 
-      <Table />
+      <Contacts />
     )
 }
