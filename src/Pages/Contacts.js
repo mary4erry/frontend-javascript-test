@@ -48,7 +48,8 @@ export const Contacts = () => {
                   }
                   return <ContactsTable 
                      data = {contacts.data}
-                     onSort = {onSort}/>
+                     onSort = {onSort}
+                     sortDirection = {contacts.sortDirection}/>
                })()}
             </Grid>
             <Grid item xs={12}>

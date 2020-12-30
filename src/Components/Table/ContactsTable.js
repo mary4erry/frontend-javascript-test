@@ -1,30 +1,52 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { makeStyles, 
+        Table,
+        TableBody,
+        TableCell,
+        TableContainer,
+        TableHead,
+        TableRow,
+        Paper } from '@material-ui/core'
+import ArrowDropDownIcon  from '@material-ui/icons/ArrowDropDown'
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import { useContacts } from '../../Pages/useContacts'
 
 const useStyles = makeStyles({
    table: {
    },
  })
 
-export const ContactsTable = ({data, onSort}) => {
-   const classes = useStyles()
+export const ContactsTable = ({data, onSort, sortDirection}) => {
+  const classes = useStyles()
+  const contacts = useContacts()
 
-   return (
-      <TableContainer component={Paper}>
+  const Arrow = () => {
+    return sortDirection ? <ArrowDropUpIcon/> : <ArrowDropDownIcon/>
+  }
+  const fieldSort = (field) => {
+    onSort(field)
+    contacts.setfieldData(field)
+  }
+
+  return (
+    <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="contacts table">
         <TableHead>
           <TableRow>
-            <TableCell onClick={() => {onSort('id')}}>id</TableCell>
-            <TableCell onClick={() => {onSort('firstName')}}>firstName</TableCell>
-            <TableCell onClick={() => {onSort('lastName')}}>lastName</TableCell>
-            <TableCell onClick={() => {onSort('email')}}>email</TableCell>
-            <TableCell onClick={() => {onSort('phone')}}>phone</TableCell>
+            <TableCell onClick={() => {fieldSort('id')}}>
+              id { contacts.fieldData === 'id' ? <Arrow /> : null}
+            </TableCell>
+            <TableCell onClick={() => {fieldSort('firstName')}}>
+              firstName { contacts.fieldData === 'firstName' ? <Arrow /> : null}
+            </TableCell>
+            <TableCell onClick={() => {fieldSort('lastName')}}>
+              lastName { contacts.fieldData === 'lastName' ? <Arrow /> : null}
+            </TableCell>
+            <TableCell onClick={() => {fieldSort('email')}}>
+              email { contacts.fieldData === 'email' ? <Arrow /> : null}
+            </TableCell>
+            <TableCell onClick={() => {fieldSort('phone')}}>
+              phone { contacts.fieldData === 'phone' ? <Arrow /> : null}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,5 +62,5 @@ export const ContactsTable = ({data, onSort}) => {
         </TableBody>
       </Table>
     </TableContainer>
-   )   
+  )   
 }
