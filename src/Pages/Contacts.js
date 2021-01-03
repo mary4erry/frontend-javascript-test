@@ -3,6 +3,7 @@ import { Grid, Paper,
 import { makeStyles } from '@material-ui/core/styles';
 import { useContacts } from './useContacts'
 import { ContactsTable } from '../Components/Table/ContactsTable'
+import { ContactInfo } from '../Components/ContactInfo/ContactInfo'
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -28,6 +29,9 @@ export const Contacts = () => {
       )
       contacts.setData(sort)
    }
+   const showInfo = (field) => {
+      contacts.setContactInfo(field)
+   }
 
    return ( 
       <Container className={classes.root}>
@@ -49,14 +53,18 @@ export const Contacts = () => {
                   return <ContactsTable 
                      data = {contacts.data}
                      onSort = {onSort}
-                     sortDirection = {contacts.sortDirection}/>
+                     sortDirection = {contacts.sortDirection}
+                     showInfo = {showInfo}
+                     />
                })()}
             </Grid>
             <Grid item xs={12}>
-               <Paper> Full Info </Paper>
+               <Paper> Pagination </Paper>
             </Grid>
             <Grid item xs={12}>
-               <Paper> Pagination </Paper>
+               <Paper> 
+                  <ContactInfo contactInfo={contacts.contactInfo}/> 
+               </Paper>
             </Grid>
          </Grid> 
       </Container>

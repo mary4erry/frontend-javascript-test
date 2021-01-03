@@ -15,7 +15,7 @@ const useStyles = makeStyles({
    },
  })
 
-export const ContactsTable = ({data, onSort, sortDirection}) => {
+export const ContactsTable = ({data, onSort, sortDirection, showInfo}) => {
   const classes = useStyles()
   const contacts = useContacts()
 
@@ -51,7 +51,7 @@ export const ContactsTable = ({data, onSort, sortDirection}) => {
         </TableHead>
         <TableBody>
           {data.map((contact) => (
-            <TableRow key={contact.id + contact.phone}>
+            <TableRow key={contact.id + contact.phone} onClick = {() => showInfo(contact)}>
               <TableCell component='th' scope='row'>{contact.id}</TableCell>
               <TableCell>{contact.firstName}</TableCell>
               <TableCell>{contact.lastName}</TableCell>

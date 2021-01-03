@@ -9,6 +9,7 @@ export const useContacts = () => {
    const [isError, setIsError] = useState(false)
    const [sortDirection, setSortDirection] = useState(true)
    const [fieldData, setfieldData] = useState('')
+   const [contactInfo, setContactInfo] = useState('')
 
    useEffect(() => {
       const getContacts = async() => {
@@ -35,6 +36,8 @@ export const useContacts = () => {
       sortDirection, 
       setSortDirection,
       setfieldData,
-      fieldData
+      fieldData,
+      contactInfo,
+      setContactInfo
    }
 }
