@@ -7,10 +7,9 @@ export const ContactInfo = ({contactInfo}) => {
    const zip = contactInfo && contactInfo.address ? contactInfo.address.zip : null
 
    return ( <div>
-      {console.log(contactInfo)}      
       <p>Выбран пользователь</p>  
-      <b>{contactInfo.firstName} 
-         {contactInfo.lastName}</b>
+      <b>{contactInfo.firstName} </b> 
+      <b>{contactInfo.lastName}</b>
       <p>Описание:</p>
       <b>{contactInfo.description}</b>
       <p>Адрес проживания:</p> 

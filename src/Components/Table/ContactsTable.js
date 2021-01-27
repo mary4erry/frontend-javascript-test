@@ -15,7 +15,7 @@ const useStyles = makeStyles({
    },
  })
 
-export const ContactsTable = ({data, onSort, sortDirection, showInfo}) => {
+export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldData, fieldData}) => {
   const classes = useStyles()
   const contacts = useContacts()
 
@@ -24,7 +24,7 @@ export const ContactsTable = ({data, onSort, sortDirection, showInfo}) => {
   }
   const fieldSort = (field) => {
     onSort(field)
-    contacts.setfieldData(field)
+    setfieldData(field)
   }
 
   return (
@@ -33,19 +33,19 @@ export const ContactsTable = ({data, onSort, sortDirection, showInfo}) => {
         <TableHead>
           <TableRow>
             <TableCell onClick={() => {fieldSort('id')}}>
-              id { contacts.fieldData === 'id' ? <Arrow /> : null}
+              id { fieldData === 'id' ? <Arrow /> : null}
             </TableCell>
             <TableCell onClick={() => {fieldSort('firstName')}}>
-              firstName { contacts.fieldData === 'firstName' ? <Arrow /> : null}
+              firstName { fieldData === 'firstName' ? <Arrow /> : null}
             </TableCell>
             <TableCell onClick={() => {fieldSort('lastName')}}>
-              lastName { contacts.fieldData === 'lastName' ? <Arrow /> : null}
+              lastName { fieldData === 'lastName' ? <Arrow /> : null}
             </TableCell>
             <TableCell onClick={() => {fieldSort('email')}}>
-              email { contacts.fieldData === 'email' ? <Arrow /> : null}
+              email { fieldData === 'email' ? <Arrow /> : null}
             </TableCell>
             <TableCell onClick={() => {fieldSort('phone')}}>
-              phone { contacts.fieldData === 'phone' ? <Arrow /> : null}
+              phone { fieldData === 'phone' ? <Arrow /> : null}
             </TableCell>
           </TableRow>
         </TableHead>
