@@ -48,10 +48,9 @@ export const Contacts = () => {
 
    return ( 
       <Container className={classes.root}>
-         <Grid container spacing={3}>
-            <Switch handleSwitch={handleSwitch}/>
-            {isDataSelected ? 
-               <>
+         <Grid container spacing={3} style={{display: "flex", justifyContent: "center"}}>
+            {(!isDataSelected) ? <Switch handleSwitch={handleSwitch}/>
+               : <>
                   <Grid item xs={12}>
                      <Paper> Add contact </Paper>
                   </Grid>
@@ -82,9 +81,7 @@ export const Contacts = () => {
                   { isRowSelected ? <Grid item xs={12}>
                      <ContactInfo contactInfo={contactInfo}/> 
                   </Grid> : null }
-               </>  
-               : null}
-               
+               </>}
          </Grid> 
       </Container>
    )
