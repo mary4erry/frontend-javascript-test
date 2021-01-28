@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 export const Contacts = () => {
    const classes = useStyles()
    const [ isDataSelected, setIsDataSelected ] = useState(false)
+   const [ isRowSelected, setIsRowSelected ] = useState(false)
    const [sortDirection, setSortDirection] = useState(true)
    const [fieldData, setfieldData] = useState('')
    const [contactInfo, setContactInfo] = useState('')
@@ -38,6 +39,7 @@ export const Contacts = () => {
    }
    const showInfo = (field) => {
       setContactInfo(field)
+      setIsRowSelected(true)
    }
    const handleSwitch = (url) => {
       setUrl(url)
@@ -48,39 +50,39 @@ export const Contacts = () => {
       <Container className={classes.root}>
          <Grid container spacing={3}>
             <Switch handleSwitch={handleSwitch}/>
-            {(isDataSelected) ? <>
-               <Grid item xs={12}>
-                  <Paper> Add contact </Paper>
-               </Grid>
-               <Grid item xs={12}>
-                  <Paper> Search </Paper>
-               </Grid>
-               <Grid item xs={12}>
-                  {(() => {
-                     if (contacts.isLoading) {
-                        return <div> ...loading </div>
-                     }
-                     if (contacts.isError) {
-                        return <div> error! </div>
-                     }
-                     return <ContactsTable 
-                        data = {contacts.data}
-                        onSort = {onSort}
-                        sortDirection = {sortDirection}
-                        showInfo = {showInfo}
-                        setfieldData ={setfieldData}
-                        fieldData ={fieldData}
-                        />
-                  })()}
-               </Grid>
-               <Grid item xs={12}>
-                  <Paper> Pagination </Paper>
-               </Grid>
-               { contactInfo ? <Grid item xs={12}>
-                  <ContactInfo contactInfo={contactInfo}/> 
-               </Grid> : null }
-               </>
-                  
+            {isDataSelected ? 
+               <>
+                  <Grid item xs={12}>
+                     <Paper> Add contact </Paper>
+                  </Grid>
+                  <Grid item xs={12}>
+                     <Paper> Search </Paper>
+                  </Grid>
+                  <Grid item xs={12}>
+                     {(() => {
+                        if (contacts.isLoading) {
+                           return <div> ...loading </div>
+                        }
+                        if (contacts.isError) {
+                           return <div> error! </div>
+                        }
+                        return <ContactsTable 
+                           data = {contacts.data}
+                           onSort = {onSort}
+                           sortDirection = {sortDirection}
+                           showInfo = {showInfo}
+                           setfieldData ={setfieldData}
+                           fieldData ={fieldData}
+                           />
+                     })()}
+                  </Grid>
+                  <Grid item xs={12}>
+                     <Paper> Pagination </Paper>
+                  </Grid>
+                  { isRowSelected ? <Grid item xs={12}>
+                     <ContactInfo contactInfo={contactInfo}/> 
+                  </Grid> : null }
+               </>  
                : null}
                
          </Grid> 
