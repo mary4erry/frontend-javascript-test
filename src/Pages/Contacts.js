@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Grid, Paper, 
          Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,13 +15,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const Contacts = () => {
    const classes = useStyles()
-   const url = "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
-   const urlBig = "http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
-   const [ selectedUrl, setSelectedUrl ] = useState(false)
+   const [ isDataSelected, setIsDataSelected ] = useState(false)
    const [sortDirection, setSortDirection] = useState(true)
    const [fieldData, setfieldData] = useState('')
    const [contactInfo, setContactInfo] = useState('')
-   const contacts = useContacts(url)
+   const [url, setUrl] = useState('')
+   const contacts = useContacts( url )
 
    const onSort = (field) => {
       const copyData = contacts.data.concat()
@@ -41,46 +40,49 @@ export const Contacts = () => {
       setContactInfo(field)
    }
    const handleSwitch = (url) => {
-      contacts.setUrl(contacts.url)
-      console.log(url);
+      setUrl(url)
+      setIsDataSelected(true)
    }
 
    return ( 
       <Container className={classes.root}>
          <Grid container spacing={3}>
             <Switch handleSwitch={handleSwitch}/>
-            <Grid item xs={12}>
-               <Paper> Add contact </Paper>
-            </Grid>
-            <Grid item xs={12}>
-               <Paper> Search </Paper>
-            </Grid>
-            <Grid item xs={12}>
-               {(() => {
-                  if (contacts.isLoading) {
-                     return <div> ...loading </div>
-                  }
-                  if (contacts.isError) {
-                     return <div> ...error </div>
-                  }
-                  return <ContactsTable 
-                     data = {contacts.data}
-                     onSort = {onSort}
-                     sortDirection = {sortDirection}
-                     showInfo = {showInfo}
-                     setfieldData ={setfieldData}
-                     fieldData ={fieldData}
-                     />
-               })()}
-            </Grid>
-            <Grid item xs={12}>
-               <Paper> Pagination </Paper>
-            </Grid>
-            { contactInfo ? <Grid item xs={12}>
-               <Paper> 
+            {(isDataSelected) ? <>
+               <Grid item xs={12}>
+                  <Paper> Add contact </Paper>
+               </Grid>
+               <Grid item xs={12}>
+                  <Paper> Search </Paper>
+               </Grid>
+               <Grid item xs={12}>
+                  {(() => {
+                     if (contacts.isLoading) {
+                        return <div> ...loading </div>
+                     }
+                     if (contacts.isError) {
+                        return <div> error! </div>
+                     }
+                     return <ContactsTable 
+                        data = {contacts.data}
+                        onSort = {onSort}
+                        sortDirection = {sortDirection}
+                        showInfo = {showInfo}
+                        setfieldData ={setfieldData}
+                        fieldData ={fieldData}
+                        />
+                  })()}
+               </Grid>
+               <Grid item xs={12}>
+                  <Paper> Pagination </Paper>
+               </Grid>
+               { contactInfo ? <Grid item xs={12}>
                   <ContactInfo contactInfo={contactInfo}/> 
-               </Paper>
-            </Grid> : null }
+               </Grid> : null }
+               </>
+                  
+               : null}
+               
          </Grid> 
       </Container>
    )

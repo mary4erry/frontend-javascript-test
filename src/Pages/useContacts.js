@@ -4,7 +4,6 @@ export const useContacts = (url) => {
    const [data, setData] = useState([])
    const [isLoading, setIsLoading] = useState(true)
    const [isError, setIsError] = useState(false)
-   const [selectedUrl, setSelectedUrl] = useState('')
 
    useEffect(() => {
       const getContacts = async() => {
@@ -21,7 +20,7 @@ export const useContacts = (url) => {
          }
       }
       getContacts()
-   }, [])
+   }, [url])
 
    return {
       data,

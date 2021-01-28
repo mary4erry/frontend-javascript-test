@@ -8,7 +8,6 @@ import { makeStyles,
         Paper } from '@material-ui/core'
 import ArrowDropDownIcon  from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import { useContacts } from '../../Pages/useContacts'
 
 const useStyles = makeStyles({
    table: {
@@ -17,7 +16,6 @@ const useStyles = makeStyles({
 
 export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldData, fieldData}) => {
   const classes = useStyles()
-  const contacts = useContacts()
 
   const Arrow = () => {
     return sortDirection ? <ArrowDropUpIcon/> : <ArrowDropDownIcon/>
@@ -51,7 +49,8 @@ export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldDa
         </TableHead>
         <TableBody>
           {data.map((contact) => (
-            <TableRow key={contact.id + contact.phone} onClick = {() => showInfo(contact)}>
+            <TableRow key={contact.id + contact.phone} 
+              onClick = {() => showInfo(contact)}>
               <TableCell component='th' scope='row'>{contact.id}</TableCell>
               <TableCell>{contact.firstName}</TableCell>
               <TableCell>{contact.lastName}</TableCell>
