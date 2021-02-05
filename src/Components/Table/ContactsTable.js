@@ -8,13 +8,14 @@ import { makeStyles,
         Paper } from '@material-ui/core'
 import ArrowDropDownIcon  from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import { SearchForm } from '../Search/SearchForm'
 
 const useStyles = makeStyles({
-   table: {
-   },
- })
+  table: {
+  },
+})
 
-export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldData, fieldData}) => {
+export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldData, fieldData, onSearchSend}) => {
   const classes = useStyles()
 
   const Arrow = () => {
@@ -26,6 +27,8 @@ export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldDa
   }
 
   return (
+    <>
+    <SearchForm onSearchSend={onSearchSend}/>
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="contacts table">
         <TableHead>
@@ -61,5 +64,6 @@ export const ContactsTable = ({data, onSort, sortDirection, showInfo, setfieldDa
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   )   
 }

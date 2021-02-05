@@ -10,6 +10,7 @@ import Switch from '../Components/Switch/Switch'
 const useStyles = makeStyles((theme) => ({
    root: {
      marginTop: theme.spacing(3),
+     maxWidth: '800px',
    },
  }))
 
@@ -24,15 +25,27 @@ export const Contacts = () => {
    const contacts = useContacts( url )
    const [page, setPage] = useState(0)
    const [rowsPerPage] = useState(50)
+   const [searchText, setSearchText] = useState('')
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  }
-
-   const totalUsersCount = contacts.data.length
+   const getFilteredData = () => {
+      const search = searchText.toLowerCase()
+      if(!searchText){
+         return contacts.data
+      } 
+      return contacts.data.filter( 
+         d => { 
+            return ( 
+            d['firstName'].toLowerCase().includes(search) || 
+            d['lastName'].toLowerCase().includes(search) || 
+            d['email'].toLowerCase().includes(search) 
+         )}
+      )
+   }
+   const filteredData = getFilteredData()
+   const totalUsersCount = filteredData.length
    const indexOfFirsRow = page * rowsPerPage 
    const indexOfLasRow = (page + 1) *  rowsPerPage  
-   const currentUsers = contacts.data.slice(indexOfFirsRow, indexOfLasRow)
+   const currentUsers = filteredData.slice(indexOfFirsRow, indexOfLasRow)
 
    const onSort = (field) => {
       const copyData = contacts.data.concat()
@@ -56,7 +69,12 @@ export const Contacts = () => {
       setUrl(url)
       setIsDataSelected(true)
    }
- 
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage)
+   }
+   const onSearchSend = (text) => {
+      setSearchText(text)
+   }
    return ( 
       <Container className={classes.root}>
          <Grid container spacing={3} style={{display: "flex", justifyContent: "center"}}>
@@ -64,9 +82,6 @@ export const Contacts = () => {
                : <>
                   <Grid item xs={12}>
                      <Paper> Add contact </Paper>
-                  </Grid>
-                  <Grid item xs={12}>
-                     <Paper> Search </Paper>
                   </Grid>
                   <Grid item xs={12}>
                      <TablePagination 
@@ -93,6 +108,7 @@ export const Contacts = () => {
                            showInfo = {showInfo}
                            setfieldData ={setfieldData}
                            fieldData ={fieldData}
+                           onSearchSend={onSearchSend}
                            />
                      })()}
                   </Grid>
