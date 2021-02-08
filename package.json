@@ -2,6 +2,7 @@
   "name": "test-reactapp-table",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mary4erry.github.io/test-reactapp-table/",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -40,6 +41,5 @@
   },
   "devDependencies": {
     "gh-pages": "^3.1.0"
-  },
-  "homepage": "https://mary4erry.github.io/test-reactapp-table/",
+  }
 }
