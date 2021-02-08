@@ -7,9 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
    root: {
-     padding: '2px 4px',
-     display: 'flex',
-     justifyContent: 'spaceBetween',
+      marginBottom: theme.spacing(1), 
+      display: 'flex',
+      justifyContent: 'spaceBetween',
    },
    input: {
      marginLeft: theme.spacing(1),
