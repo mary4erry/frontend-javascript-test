@@ -25,6 +25,10 @@ export const SearchForm = ({onSearchSend}) => {
    const classes = useStyles()
    const [searchValue, setSearchValue] = useState('')
 
+   const handleClick=(e) =>  {
+      e.preventDefault()
+      onSearchSend(searchValue)
+   }
    return (
       <Paper component="form" className={classes.root}>
          <InputBase
@@ -37,7 +41,7 @@ export const SearchForm = ({onSearchSend}) => {
          <IconButton type="submit" 
             className={classes.iconButton} 
             aria-label="search"
-            onClick={() => onSearchSend(searchValue)}>
+            onClick={handleClick}>
             <SearchIcon />
          </IconButton>
       </Paper>
