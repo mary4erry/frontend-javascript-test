@@ -30,8 +30,10 @@ const SelectButton = withStyles({
  })(Button);
 
 export default function Switch ({handleSwitch}) {
+  // const urlSmall = "https://mary4erry.github.io/fake-server/urlSmall.json"
+  // const urlBig = "https://mary4erry.github.io/fake-server/urlBig.json"  
   const urlSmall = "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
-  const urlBig = "http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"    
+  const urlBig = "http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}" 
 
   return (
   <div>
